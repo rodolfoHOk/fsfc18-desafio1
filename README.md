@@ -68,3 +68,9 @@
 - copiar do cloner a pasta /apps/partner1/src/events exceto events.module para o novo projeto pasta src/events
 - ajustar imports do events.controller
 - adicionar events.controller ao events.module
+
+### Copiando spots controller
+
+- copiar do cloner a pasta /apps/partner1/src/spots exceto spots.module para o novo projeto pasta src/spots
+- ajustar imports do spots.controller
+- adicionar spots.controller ao spots.module
