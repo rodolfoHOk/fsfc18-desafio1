@@ -122,8 +122,15 @@
 
 ### Implementando exception filter
 
+- criar validation exception
 - criar custom exception filter
 - registar custom exception filter
+
+### Adicionar e usar resource not found exception
+
+- criar resource not found exception
+- adicionar resource not found exception no custom exception filter
+- usar resource not found exception nos serviços
 
 ## Links
 

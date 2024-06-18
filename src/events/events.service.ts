@@ -5,6 +5,8 @@ import { ReserveSpotDto } from './dto/reserve-spot.dto';
 import { Prisma, SpotStatus, TicketStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { ResourceNotFoundException } from 'src/exceptions/resource-not-found.exception';
+import { SpotsAlreadyReservedException } from 'src/exceptions/spots-already-reserved.exception';
+import { ReservationException } from 'src/exceptions/reservation.exception';
 
 @Injectable()
 export class EventsService {
@@ -67,7 +69,18 @@ export class EventsService {
       const notFoundSpotsName = dto.spots.filter(
         (spotName) => !foundSpotsName.includes(spotName),
       );
-      throw new Error(`Spots ${notFoundSpotsName.join(', ')} not found`);
+      throw new ResourceNotFoundException(
+        `Spots not exists: ${notFoundSpotsName.join(', ')}`,
+      );
+    }
+
+    const spotsAlreadyReserved = spots.filter(
+      (spot) => spot.status === 'reserved',
+    );
+    if (spotsAlreadyReserved.length > 0) {
+      throw new SpotsAlreadyReservedException(
+        `Spots ${spotsAlreadyReserved.map((spot) => spot.name).join(', ')} is not available for reservation`,
+      );
     }
 
     try {
@@ -115,10 +128,14 @@ export class EventsService {
         switch (e.code) {
           case 'P2002': // unique constraint violation
           case 'P2034': // transaction conflict
-            throw new Error('Some spots are already reserved');
+            throw new SpotsAlreadyReservedException(
+              'Some spots are already reserved',
+            );
+          default:
+            throw new ReservationException(e.message);
         }
       }
-      throw e;
+      throw new ReservationException(e.message);
     }
   }
 }

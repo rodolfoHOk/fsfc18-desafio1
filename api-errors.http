@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Event Id
-@eventId = 238bd872-3e3f-4542-94a0-b0cf3ba1e643
+@eventId = 98b9c964-e857-4720-92e1-3de9b35db339
 
 ### List spots by event id
 GET http://localhost:3000/events/{{eventId}}/spots
@@ -35,4 +35,15 @@ X-Api-Token: 123
   "spots": [],
   "ticket_kind": "",
   "email": "test$test.com"
+}
+
+### Reserve spot by event id
+POST http://localhost:3000/events/{{eventId}}/reserve
+Content-Type: application/json
+X-Api-Token: 123
+
+{
+  "spots": ["A1", "C3", "D5"],
+  "ticket_kind": "full",
+  "email": "test@test.com"
 }
