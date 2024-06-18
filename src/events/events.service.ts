@@ -4,6 +4,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { ReserveSpotDto } from './dto/reserve-spot.dto';
 import { Prisma, SpotStatus, TicketStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { ResourceNotFoundException } from 'src/exceptions/resource-not-found.exception';
 
 @Injectable()
 export class EventsService {
@@ -22,13 +23,19 @@ export class EventsService {
     return this.prismaService.event.findMany();
   }
 
-  findOne(id: string) {
-    return this.prismaService.event.findUnique({
-      where: { id },
-    });
+  async findOne(id: string) {
+    try {
+      return await this.prismaService.event.findUniqueOrThrow({
+        where: { id },
+      });
+    } catch (error) {
+      throw new ResourceNotFoundException('Event not found');
+    }
   }
 
-  update(id: string, updateEventDto: UpdateEventDto) {
+  async update(id: string, updateEventDto: UpdateEventDto) {
+    await this.findOne(id);
+
     return this.prismaService.event.update({
       data: {
         ...updateEventDto,
@@ -38,7 +45,9 @@ export class EventsService {
     });
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+    await this.findOne(id);
+
     return this.prismaService.event.delete({
       where: { id },
     });
