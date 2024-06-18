@@ -6,10 +6,10 @@ POST http://localhost:3000/events
 Content-Type: application/json
 
 {
-  "name": "New Event 1",
-  "description": "This is a new event",
-  "date": "2017-01-01T00:00:00",
-  "price": 100
+  "name": "",
+  "description": "",
+  "date": "",
+  "price": -1
 }
 
 ### Event Id
@@ -23,7 +23,7 @@ POST http://localhost:3000/events/{{eventId}}/spots
 Content-Type: application/json
 
 {
-  "name": "A1"
+  "name": ""
 }
 
 ### Reserve spot by event id
@@ -32,7 +32,7 @@ Content-Type: application/json
 X-Api-Token: 123
 
 {
-  "spots": ["A1"],
-  "ticket_kind": "full",
-  "email": "test@test.com"
+  "spots": [],
+  "ticket_kind": "",
+  "email": "test$test.com"
 }

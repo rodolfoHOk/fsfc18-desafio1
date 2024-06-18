@@ -50,6 +50,7 @@
 ### Comandos
 
 - docker compose up
+- docker compose exec app bash
 - npx prisma migrate dev
 - npm run start:dev
 
@@ -119,6 +120,12 @@
 - adicionar decorators de validação no create spot request
 - adicionar decorators de validação no reserve spot request
 
+### Implementando exception filter
+
+- criar custom exception filter
+- registar custom exception filter
+
 ## Links
 
 - [Nest.js validation](https://docs.nestjs.com/techniques/validation)
+- [Nest.js exception-filters](https://docs.nestjs.com/exception-filters)
