@@ -44,9 +44,15 @@
 - copiar do clone o pasta /libs/core/src/prisma para o novo projeto pasta src/prisma substituindo prisma.module
 - npx prisma migrate dev
 
-### Copiando o módulo events
+### Criando e copiando o módulo events
 
 - criação do módulo de events: nest g module events
 - copiar do clone o pasta /libs/core/src/events para o novo projeto pasta src/events
 - apagar events.module gerado e renomear events-core.module para events.module
 - instalar @nestjs/mapped-types: npm install @nestjs/mapped-types
+
+### Criando e copiando o módulo spots
+
+- criação do módulo de events: nest g module spots
+- copiar do clone o pasta /libs/core/src/spots para o novo projeto pasta src/spots
+- apagar spots.module gerado e renomear spots-core.module para spots.module
