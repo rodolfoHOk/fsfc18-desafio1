@@ -46,13 +46,19 @@
 
 ### Criando e copiando o módulo events
 
-- criação do módulo de events: nest g module events
+- criação do módulo events: nest g module events
 - copiar do clone o pasta /libs/core/src/events para o novo projeto pasta src/events
 - apagar events.module gerado e renomear events-core.module para events.module
 - instalar @nestjs/mapped-types: npm install @nestjs/mapped-types
 
 ### Criando e copiando o módulo spots
 
-- criação do módulo de events: nest g module spots
+- criação do módulo spots: nest g module spots
 - copiar do clone o pasta /libs/core/src/spots para o novo projeto pasta src/spots
 - apagar spots.module gerado e renomear spots-core.module para spots.module
+
+### Criando e copiando o módulo auth
+
+- criação do módulo auth: nest g module auth
+- copiar do clone o pasta /libs/core/src/auth para o novo projeto pasta src/auth
+- remover do auth.guard a dependência de @nestjs/config
