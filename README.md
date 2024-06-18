@@ -38,27 +38,33 @@
 
 - iniciar prisma: npx prisma init
 - instalar o prisma client: npm install @prisma/client
-- copiar do clone o pasta /prisma para o novo projeto pasta prisma substituindo schema.prisma
+- copiar do clone a pasta /prisma para o novo projeto pasta prisma substituindo schema.prisma
 - copiar do clone .env.partner1 para o novo projeto e renomear para .env
 - criação do módulo prisma: nest g module prisma
-- copiar do clone o pasta /libs/core/src/prisma para o novo projeto pasta src/prisma substituindo prisma.module
+- copiar do clone a pasta /libs/core/src/prisma para o novo projeto pasta src/prisma substituindo prisma.module
 - npx prisma migrate dev
 
 ### Criando e copiando o módulo events
 
 - criação do módulo events: nest g module events
-- copiar do clone o pasta /libs/core/src/events para o novo projeto pasta src/events
+- copiar do clone a pasta /libs/core/src/events para o novo projeto pasta src/events
 - apagar events.module gerado e renomear events-core.module para events.module
 - instalar @nestjs/mapped-types: npm install @nestjs/mapped-types
 
 ### Criando e copiando o módulo spots
 
 - criação do módulo spots: nest g module spots
-- copiar do clone o pasta /libs/core/src/spots para o novo projeto pasta src/spots
+- copiar do clone a pasta /libs/core/src/spots para o novo projeto pasta src/spots
 - apagar spots.module gerado e renomear spots-core.module para spots.module
 
 ### Criando e copiando o módulo auth
 
 - criação do módulo auth: nest g module auth
-- copiar do clone o pasta /libs/core/src/auth para o novo projeto pasta src/auth
+- copiar do clone a pasta /libs/core/src/auth para o novo projeto pasta src/auth
 - remover do auth.guard a dependência de @nestjs/config
+
+### Copiando events controller
+
+- copiar do cloner a pasta /apps/partner1/src/events exceto events.module para o novo projeto pasta src/events
+- ajustar imports do events.controller
+- adicionar events.controller ao events.module
