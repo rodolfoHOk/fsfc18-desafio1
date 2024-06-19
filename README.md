@@ -1,5 +1,24 @@
 # Imersão FullStack & FullCycle 18 - Desafio 1
 
+## Rodar
+
+### Requisitos
+
+- Docker
+
+### Comandos
+
+- docker compose up --build
+
+## Tecnologias
+
+- Typescript / Javascript
+- Node.js
+- Nest.js
+- Prisma.js
+- MySQL
+- Docker
+
 ## Informações do desafio
 
 ### Neste desafio, você deverá clonar a aplicação Nest.js do projeto da Imersão Full Cycle e implementar algumas coisas:
@@ -31,28 +50,6 @@
 - Quando os spots passados não existirem lançar um erro 404 com body “{message: Spots not exists: A1, C3, D5, etc}”
 - Quando os spots passados não existirem disponíveis para reservar um erro 400 com body “{message: Spots A1 is not available for reservation”
 - Quando lançar um erro no trecho transaction do prisma, precisa responder com status 400 + a mensagem do erro
-
-## Tecnologias
-
-- Typescript / Javascript
-- Node.js
-- Nest.js
-- Prisma.js
-- MySQL
-- Docker
-
-## Rodar
-
-### Requisitos
-
-- Docker
-
-### Comandos
-
-- docker compose up
-- docker compose exec app bash
-- npx prisma migrate dev
-- npm run start:dev
 
 ## Etapas realizadas
 
@@ -132,7 +129,13 @@
 - adicionar resource not found exception no custom exception filter
 - usar resource not found exception nos serviços
 
-## Links
+### Tratando melhor os erros da operação de reserva
+
+- criar spots already reserved exception e reservation exception
+- utilizar no método reserveSpot do EventsService
+- adicionar no CustomExceptionFilter as exceptions criadas
+
+## Links de referências
 
 - [Nest.js validation](https://docs.nestjs.com/techniques/validation)
 - [Nest.js exception-filters](https://docs.nestjs.com/exception-filters)
