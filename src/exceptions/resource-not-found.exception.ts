@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { PartnerApiException } from './partner-api.exception';
 
-export class ResourceNotFoundException extends HttpException {
+export class ResourceNotFoundException extends PartnerApiException {
   constructor(message: string) {
-    super(message, HttpStatus.NOT_FOUND);
+    super(message);
   }
 }

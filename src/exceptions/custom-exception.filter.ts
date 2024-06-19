@@ -1,18 +1,15 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpException,
-} from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Response } from 'express';
 import { ValidationException } from './validation.exception';
 import { ResourceNotFoundException } from './resource-not-found.exception';
 import { SpotsAlreadyReservedException } from './spots-already-reserved.exception';
 import { ReservationException } from './reservation.exception';
+import { PartnerApiException } from './partner-api.exception';
+import { ConstraintViolationException } from './constraint-violation.exception';
 
-@Catch(HttpException)
+@Catch(PartnerApiException)
 export class CustomExceptionFilter implements ExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost) {
+  catch(exception: PartnerApiException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     let status = exception.getStatus();
@@ -31,6 +28,12 @@ export class CustomExceptionFilter implements ExceptionFilter {
       message = exception.message;
     } else if (exception instanceof ReservationException) {
       status = 400;
+      message = exception.message;
+    } else if (exception instanceof ConstraintViolationException) {
+      status = 400;
+      message = exception.message;
+    } else if (exception instanceof PartnerApiException) {
+      status = 500;
       message = exception.message;
     }
 

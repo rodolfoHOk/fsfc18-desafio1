@@ -1,11 +1,11 @@
-import { BadRequestException } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
+import { PartnerApiException } from './partner-api.exception';
 
-export class ValidationException extends BadRequestException {
+export class ValidationException extends PartnerApiException {
   validationErrors: ValidationError[];
 
   constructor(validationErrors: ValidationError[]) {
-    super(validationErrors);
+    super('Unprocessable Entity');
     this.validationErrors = validationErrors;
   }
 }

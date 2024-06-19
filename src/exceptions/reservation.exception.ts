@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { PartnerApiException } from './partner-api.exception';
 
-export class ReservationException extends HttpException {
+export class ReservationException extends PartnerApiException {
   constructor(message: string) {
-    super(message, HttpStatus.BAD_REQUEST);
+    super(message);
   }
 }

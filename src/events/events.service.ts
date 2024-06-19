@@ -7,6 +7,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { ResourceNotFoundException } from 'src/exceptions/resource-not-found.exception';
 import { SpotsAlreadyReservedException } from 'src/exceptions/spots-already-reserved.exception';
 import { ReservationException } from 'src/exceptions/reservation.exception';
+import { ConstraintViolationException } from 'src/exceptions/constraint-violation.exception';
+import { PartnerApiException } from 'src/exceptions/partner-api.exception';
 
 @Injectable()
 export class EventsService {
@@ -50,9 +52,23 @@ export class EventsService {
   async remove(id: string) {
     await this.findOne(id);
 
-    return this.prismaService.event.delete({
-      where: { id },
-    });
+    try {
+      return await this.prismaService.event.delete({
+        where: { id },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        switch (error.code) {
+          case 'P2003': // Foreign key constraint violation
+            throw new ConstraintViolationException(
+              'Foreign key constraint error on try remove event',
+            );
+          default:
+            throw new PartnerApiException('Error on try remove event');
+        }
+      }
+      throw new PartnerApiException('Error on try remove event');
+    }
   }
 
   async reserveSpot(dto: ReserveSpotDto & { eventId: string }) {
